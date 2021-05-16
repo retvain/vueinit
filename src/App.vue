@@ -1,16 +1,16 @@
 <template>
 <div id="app">
-<step1></step1>
+<step2></step2>
 </div>
 </template>
 
 <script>
-import step1 from "@/components/step1";
+import step2 from "@/components/step2";
 
 export default {
   name: 'App',
   components: {
-    step1
+    step2
   }
 }
 </script>
