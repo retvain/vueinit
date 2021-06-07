@@ -24,7 +24,7 @@
     <div>
 
       <button id="less" v-on:click="decreaseCounter">-</button>
-      <input style="width: 3em" type="number" v-bind:value="counter">
+      <input style="width: 3em" type="number" v-bind:value="counter" v-bind:min="min" v-bind:max="max">
       <button id="'more" v-on:click="increaseCounter">+</button>
 
     </div>
@@ -40,7 +40,9 @@ export default {
     return {
       email: 'example@mail.com',
       password: '12345678',
-      counter: 9
+      counter: 9,
+      min: 1,
+      max: 10,
 
     }
   },
@@ -52,12 +54,12 @@ export default {
       this.password = value
     },
     increaseCounter() {
-      if ((0 <= this.counter) && (this.counter < 10)) {
+      if ((this.min <= this.counter) && (this.counter < this.max)) {
         this.counter++
       }
     },
     decreaseCounter() {
-      if ((0 < this.counter) && (this.counter <= 10)) {
+      if ((this.min < this.counter) && (this.counter <= this.max)) {
         this.counter--
       }
 

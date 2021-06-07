@@ -1,5 +1,21 @@
 <template>
   <div class="root">
+    <div style="padding-left: 200px; padding-top: 50px">
+      <br>
+      <h2>I will find you!</h2>
+      <input type="text">
+      <p>Total names: {{ this.users.length }}. Coincidence: {{ }}</p>
+
+      <p
+          style="color: gray;"
+          v-for="(value, key) in users"
+          v-bind:key="key"
+      >
+        {{ value.firstName }}
+      </p>
+
+    </div>
+    <br> <br> <br>
     <h1>How to gain 100$ in hour???</h1>
     <div class="main-information">
       <img src="http://placekitten.com/g/400/200">
@@ -18,12 +34,32 @@
     <p>participant: {{ users.length }}</p>
     <ul>
       <li
-          v-for="(users, index) in users"
+          v-for="(value, index) in users"
           v-bind:key="index">
-        {{ `${index+1} ${getFullName(users)}` }}
+        {{ `${index + 1} ${getFullName(value)}` }}
       </li>
     </ul>
-    <!--  <input type="text" @input="firstName = $event.target.value">-->
+    <button
+        type="button"
+        v-on:click="currentPage--"
+    >
+      previous
+    </button>
+    <button
+        v-for="page in pages"
+        :key="page"
+        type="button"
+        v-on:click="currentPage = page"
+    >
+      {{ page }}
+    </button>
+    <button
+        type="button"
+        v-on:click="currentPage++"
+    >
+      next
+    </button>
+    <p>Page {{ currentPage }} of {{ pages }}</p>
   </div>
 </template>
 
@@ -51,18 +87,40 @@ export default {
           secondName: 'Viktorovich',
           lastName: 'Petryakov',
         },
-      ]
+        {
+          firstName: 'Maxim',
+          secondName: 'Andreevich',
+          lastName: 'Polshkov',
+        }
+      ],
+      pages: 3,
+      currentPage: 1,
     }
   },
   // computed свойства в отличие от methods будут высчитаны только один раз, но не можем передавать переменные
   computed: {
     getAuthorFullName() {
       return `${this.firstName} ${this.secondName} ${this.lastName}`.toUpperCase()
-    }
+    },
+    searchName() {
+      return 1;
+    },
+
   },
   methods: {
     getFullName(users) {
+      console.log(this.users.includes('Ivan', 0));
       return `${users.firstName} ${users.secondName} ${users.lastName}`
+
+    },
+    loadUsers(page) {
+      console.log(`Load users: page ${page}`)
+    }
+  },
+  //watcher-ы следят за свойствами, принимает 2 аргумента, новое и старое
+  watch: {
+    currentPage(page) {
+      this.loadUsers(page)
     }
   }
 }
