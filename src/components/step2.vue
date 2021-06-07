@@ -3,15 +3,15 @@
     <div style="padding-left: 200px; padding-top: 50px">
       <br>
       <h2>I will find you!</h2>
-      <input type="text">
-      <p>Total names: {{ this.users.length }}. Coincidence: {{ }}</p>
+      <input type="text" v-on:input="text = $event.target.value">
+      <p>Total names: {{ names.length }}. Coincidence: {{ searchName.length }}</p>
 
       <p
           style="color: gray;"
-          v-for="(value, key) in users"
+          v-for="(value, key) in searchName"
           v-bind:key="key"
       >
-        {{ value.firstName }}
+        {{ value }}
       </p>
 
     </div>
@@ -71,6 +71,8 @@ export default {
       firstName: 'Mikhail',
       secondName: 'Petrovich',
       lastName: 'Ivanov',
+      names: ['Ivan', 'John', 'Sergei', 'Maxim'],
+      text: '',
       users: [
         {
           firstName: 'Ivan',
@@ -103,13 +105,13 @@ export default {
       return `${this.firstName} ${this.secondName} ${this.lastName}`.toUpperCase()
     },
     searchName() {
-      return 1;
+      return this.names.filter(name => name.toLowerCase().includes((this.text.toLowerCase())));
     },
 
   },
   methods: {
     getFullName(users) {
-      console.log(this.users.includes('Ivan', 0));
+
       return `${users.firstName} ${users.secondName} ${users.lastName}`
 
     },
