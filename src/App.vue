@@ -1,16 +1,20 @@
 <template>
 <div id="app">
-<step2></step2>
+<step3></step3>
 </div>
 </template>
 
 <script>
-import step2 from "@/components/step2";
+import step3 from "@/components/step3";
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 export default {
   name: 'App',
   components: {
-    step2
+    step3
   }
 }
 </script>
